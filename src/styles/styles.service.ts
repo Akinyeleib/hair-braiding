@@ -14,22 +14,23 @@ export class StylesService {
   ) {}
 
   create(createStyleDto: CreateStyleDto) {
-    return 'This action adds a new style';
+    return this.styleRepo.create(createStyleDto);
   }
 
   findAll() {
-    return `This action returns all styles`;
+    return this.styleRepo.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} style`;
+    return this.styleRepo.findOne({where: {id}});
   }
 
   update(id: number, updateStyleDto: UpdateStyleDto) {
-    return `This action updates a #${id} style`;
+    return this.styleRepo.update(id, updateStyleDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} style`;
+    return this.styleRepo.delete(id);
   }
+
 }
