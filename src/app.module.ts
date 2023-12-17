@@ -7,9 +7,13 @@ import { StylistsModule } from './stylists/stylists.module';
 import { RatingsModule } from './ratings/ratings.module';
 import { StylesModule } from './styles/styles.module';
 import { AppointmentsModule } from './appointments/appointments.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { typeOrmConfig } from './config/typeorm.config';
 
 @Module({
-  imports: [UsersModule, ClientsModule, StylistsModule, RatingsModule, StylesModule, AppointmentsModule],
+  imports: [
+    TypeOrmModule.forRoot(typeOrmConfig),
+    UsersModule, ClientsModule, StylistsModule, RatingsModule, StylesModule, AppointmentsModule],
   controllers: [AppController],
   providers: [AppService],
 })
