@@ -4,6 +4,7 @@ import { UpdateClientDto } from './dto/update-client.dto';
 import { Client } from './entities/client.entity';
 import { Repository } from "typeorm";
 import { InjectRepository } from '@nestjs/typeorm';
+import { hash } from "bcrypt";
 
 @Injectable()
 export class ClientsService {
@@ -12,16 +13,18 @@ export class ClientsService {
     private clientRepo: Repository<Client>
   ) {}
   
-  create(createClientDto: CreateClientDto) {
-    return 'This action adds a new client';
+  async create(createClientDto: CreateClientDto) {
+    const client = this.clientRepo.create(createClientDto);
+    client.password = await hash(client.password, 10);
+    return this.clientRepo.save(client);
   }
 
   findAll() {
-    return `This action returns all clients`;
+    return this.clientRepo.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} client`;
+    return this.clientRepo.findOne({where: {id}});
   }
 
   update(id: number, updateClientDto: UpdateClientDto) {
@@ -29,6 +32,6 @@ export class ClientsService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} client`;
+    return this.clientRepo.delete(id);
   }
 }

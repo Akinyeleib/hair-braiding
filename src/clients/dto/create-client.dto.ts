@@ -26,7 +26,4 @@ export class CreateClientDto {
   @IsString()
   @IsNotEmpty()
   password: string;
-  @IsString()
-  @IsNotEmpty()
-  status: string;
 }
