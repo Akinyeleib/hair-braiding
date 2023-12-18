@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Appointment } from './entities/appointment.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AppointmentsService {
+
+  constructor(
+    @InjectRepository(Appointment)
+    private appointmentRepo: Repository<Appointment>
+  ) {}
+
   create(createAppointmentDto: CreateAppointmentDto) {
-    return 'This action adds a new appointment';
+    return this.appointmentRepo.create(createAppointmentDto);
   }
 
   findAll() {
-    return `This action returns all appointments`;
+    return this.appointmentRepo.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} appointment`;
+    return this.appointmentRepo.findOne({where: {id}});
   }
 
   update(id: number, updateAppointmentDto: UpdateAppointmentDto) {
-    return `This action updates a #${id} appointment`;
+    return this.appointmentRepo.update(id, updateAppointmentDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} appointment`;
+    return this.appointmentRepo.delete(id);
   }
 }
