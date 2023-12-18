@@ -6,5 +6,14 @@ export class Rating {
 
   @PrimaryGeneratedColumn()
   id: number;
+  
+  @IsPositive()
+  star: number;
+
+  @IsString()
+  comment: string;
+
+  @IsPositive()
+  appointmentID: number;
 
 }
