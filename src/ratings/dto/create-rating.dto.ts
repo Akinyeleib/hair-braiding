@@ -1,6 +1,7 @@
 import { IsPositive } from "class-validator";
 
 export class CreateRatingDto {
+  
   @IsPositive()
   star: number;
 
@@ -9,4 +10,5 @@ export class CreateRatingDto {
   style: number;
 
   client: number;
+
 }
