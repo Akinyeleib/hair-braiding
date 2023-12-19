@@ -17,7 +17,7 @@ export class ClientsService {
     // const client = this.clientRepo.create(createClientDto);
     // client.password = await hash(client.password, 10);
     // return this.clientRepo.save(client);
-    return this.clientRepo.create(createClientDto);
+    return this.clientRepo.save(createClientDto);
   }
 
   findAll() {
