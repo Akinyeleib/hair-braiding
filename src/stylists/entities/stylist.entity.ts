@@ -1,5 +1,6 @@
+import { Appointment } from "src/appointments/entities/appointment.entity";
 import { Rating } from "src/ratings/entities/rating.entity";
-import { Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Stylist {
@@ -7,7 +8,13 @@ export class Stylist {
   @PrimaryGeneratedColumn()
   id: number;
 
-  
-  rating: Rating;
+  @OneToMany(() => Rating, rating => rating.stylist)
+  rating: Rating[];
 
+  @Column()
+  payment: string;
+
+  @OneToMany(() => Appointment, appointment => appointment.stylist)
+  appointment: Appointment[];
+  
 }
