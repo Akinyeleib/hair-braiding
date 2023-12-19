@@ -1,6 +1,7 @@
 import { IsPositive, IsString } from "class-validator";
 import { Client } from "src/clients/entities/client.entity";
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Stylist } from "src/stylists/entities/stylist.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Rating {
@@ -8,10 +9,10 @@ export class Rating {
   @PrimaryGeneratedColumn()
   id: number;
   
-  @IsPositive()
+  @Column()
   star: number;
 
-  @IsString()
+  @Column()
   comment: string;
 
   @IsPositive()
@@ -19,5 +20,8 @@ export class Rating {
 
   @ManyToOne(() => Client, client => client.rating)
   client: Client;
+
+  @ManyToOne(() => Stylist, stylist => stylist.rating)
+  stylist: Stylist;
 
 }
