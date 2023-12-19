@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Appointment } from "src/appointments/entities/appointment.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Client {
@@ -34,5 +35,8 @@ export class Client {
 
   @Column({default: "ACTIVE"})
   status: string;
+
+  @OneToMany(() => Appointment, appointment => appointment.client, {onDelete: "CASCADE", onUpdate: "CASCADE"})
+  appointment: Appointment;
 
 }

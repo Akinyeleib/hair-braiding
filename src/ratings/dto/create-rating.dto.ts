@@ -7,8 +7,6 @@ export class CreateRatingDto {
 
   comment: string;
 
-  style: number;
-
   client: number;
 
 }
