@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { Client } from './entities/client.entity';
@@ -14,6 +14,14 @@ export class ClientsService {
   ) {}
   
   async create(createClientDto: CreateClientDto) {
+
+    // check for unique email
+    // const uniqueEmail = 
+    await this.clientRepo.findOne(
+      {where: {email: createClientDto.email}}
+      ).then((value) => {if (value) throw new BadRequestException("Duplicate email address");}
+      ).catch();
+
     const client = this.clientRepo.create(createClientDto);
     client.password = await hash(client.password, 10);
     return this.clientRepo.save(client);
