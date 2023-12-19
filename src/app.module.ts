@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
 import { ClientsModule } from './clients/clients.module';
 import { StylistsModule } from './stylists/stylists.module';
 import { RatingsModule } from './ratings/ratings.module';
@@ -13,7 +12,7 @@ import { typeOrmConfig } from './config/typeorm.config';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
-    UsersModule, ClientsModule, StylistsModule, RatingsModule, StylesModule, AppointmentsModule],
+    ClientsModule, StylistsModule, RatingsModule, StylesModule, AppointmentsModule],
   controllers: [AppController],
   providers: [AppService],
 })
