@@ -48,9 +48,9 @@ export class Client {
   @OneToMany(() => Rating, rating => rating.client)
   rating: Rating;
 
-  @BeforeInsert()
-  async changepassword() {
-    this.password = await hash(this.password, 10);
-  }
+  // @BeforeInsert()
+  // async changepassword() {
+  //   this.password = await hash(this.password, 10);
+  // }
 
 }
