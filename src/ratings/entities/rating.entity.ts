@@ -1,5 +1,6 @@
 import { IsPositive, IsString } from "class-validator";
-import { Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Client } from "src/clients/entities/client.entity";
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Rating {
@@ -15,5 +16,8 @@ export class Rating {
 
   @IsPositive()
   appointmentID: number;
+
+  @ManyToOne(() => Client, client => client.rating)
+  client: Client;
 
 }

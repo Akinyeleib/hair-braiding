@@ -14,7 +14,7 @@ export class RatingsService {
   ) {}
 
   create(createRatingDto: CreateRatingDto) {
-    return this.ratingRepo.create(createRatingDto);
+    return 'this.ratingRepo.create(createRatingDto)';
   }
 
   findAll() {
@@ -26,7 +26,7 @@ export class RatingsService {
   }
 
   update(id: number, updateRatingDto: UpdateRatingDto) {
-    return this.ratingRepo.update(id, updateRatingDto);
+    return 'this.ratingRepo.update(id, updateRatingDto)';
   }
 
   remove(id: number) {
