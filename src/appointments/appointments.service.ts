@@ -14,7 +14,7 @@ export class AppointmentsService {
   ) {}
 
   create(createAppointmentDto: CreateAppointmentDto) {
-    return this.appointmentRepo.create(createAppointmentDto);
+    return 'this.appointmentRepo.create(createAppointmentDto)';
   }
 
   findAll() {
@@ -26,7 +26,7 @@ export class AppointmentsService {
   }
 
   update(id: number, updateAppointmentDto: UpdateAppointmentDto) {
-    return this.appointmentRepo.update(id, updateAppointmentDto);
+    return 'this.appointmentRepo.update(id, updateAppointmentDto)';
   }
 
   remove(id: number) {

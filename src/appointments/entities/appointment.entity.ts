@@ -1,5 +1,7 @@
 import { Client } from "src/clients/entities/client.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Style } from "src/styles/entities/style.entity";
+import { Stylist } from "src/stylists/entities/stylist.entity";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Appointment {
@@ -11,15 +13,16 @@ export class Appointment {
   client: Client;
 
   @Column()
-  style: number;
-
-  @Column()
   paymentStatus: string;
 
   @Column()
-  date: string;
+  date: Date;
 
-  @Column()
-  stylist: number;
+  @ManyToOne(() => Stylist, stylist => stylist.appointment)
+  stylist: Stylist;
+
+  @OneToOne(() => Style, style => style.appointment)
+  @JoinColumn()
+  style: Style;
 
 }
