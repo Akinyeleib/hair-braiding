@@ -18,7 +18,7 @@ export class StylistsService {
   }
 
   findAll() {
-    return this.stylistRepo.find();
+    return this.stylistRepo.find({relations: ['rating']});
   }
 
   findOne(id: number) {

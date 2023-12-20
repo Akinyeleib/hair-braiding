@@ -12,7 +12,7 @@ export class Rating {
   @Column()
   star: number;
 
-  @Column()
+  @Column({nullable: true})
   comment: string;
 
   @IsPositive()
