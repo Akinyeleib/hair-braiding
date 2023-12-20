@@ -14,7 +14,7 @@ export class StylesService {
   ) {}
 
   create(createStyleDto: CreateStyleDto) {
-    return this.styleRepo.create(createStyleDto);
+    return this.styleRepo.save({...createStyleDto, amount: Number(createStyleDto.amount)});
   }
 
   findAll() {
@@ -26,7 +26,7 @@ export class StylesService {
   }
 
   update(id: number, updateStyleDto: UpdateStyleDto) {
-    return this.styleRepo.update(id, updateStyleDto);
+    return this.styleRepo.update(id, {...updateStyleDto, amount: Number(updateStyleDto.amount)});
   }
 
   remove(id: number) {

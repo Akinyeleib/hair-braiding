@@ -1,14 +1,14 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsString, IsUrl, Matches } from "class-validator";
 
 export class CreateStyleDto {
   
   @IsString()
   name: string;
   
-  @IsString()
+  @IsUrl()
   photo_url: string;
   
-  @IsNumber()
+  @Matches(/\d+(\.\d+)?/, {message: "Invalid amount specified"})
   amount: string;
   
 }

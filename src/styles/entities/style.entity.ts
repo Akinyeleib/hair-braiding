@@ -7,13 +7,13 @@ export class Style {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({unique: true})
+  @Column(/*{unique: true}*/)
   name: string;
 
   @Column()
-  amount: string;
+  amount: number;
   
-  @Column({unique: true})
+  @Column(/*{unique: true}*/)
   photo_url: string;
 
   @OneToOne(() => Appointment, appointment => appointment.style)
