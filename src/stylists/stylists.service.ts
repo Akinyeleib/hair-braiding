@@ -1,19 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { CreateStylistDto } from './dto/create-stylist.dto';
 import { UpdateStylistDto } from './dto/update-stylist.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Stylist } from './entities/stylist.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class StylistsService {
+
+  constructor(
+    @InjectRepository(Stylist)
+    private stylistRepo: Repository<Stylist>
+  ) {}
+
   create(createStylistDto: CreateStylistDto) {
-    return 'This action adds a new stylist';
+    return this.stylistRepo.save(createStylistDto);
   }
 
   findAll() {
-    return `This action returns all stylists`;
+    return this.stylistRepo.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} stylist`;
+    return this.stylistRepo.findOne({where:{id}})
   }
 
   update(id: number, updateStylistDto: UpdateStylistDto) {
@@ -21,6 +30,7 @@ export class StylistsService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} stylist`;
+    return this.stylistRepo.delete(id);
   }
+  
 }
