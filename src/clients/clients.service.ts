@@ -35,7 +35,7 @@ export class ClientsService {
   }
 
   findOne(id: number) {
-    return this.clientRepo.findOne({where: {id}});
+    return this.clientRepo.findOne({where: {id}, relations: ['appointment',]});
   }
 
   update(id: number, updateClientDto: UpdateClientDto) {

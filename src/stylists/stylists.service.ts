@@ -22,7 +22,7 @@ export class StylistsService {
   }
 
   findOne(id: number) {
-    return this.stylistRepo.findOne({where:{id}})
+    return this.stylistRepo.findOne({where:{id}, relations: ['rating',]})
   }
 
   update(id: number, updateStylistDto: UpdateStylistDto) {
