@@ -31,7 +31,7 @@ export class RatingsService {
   }
 
   findAll() {
-    return this.ratingRepo.find();
+    return this.ratingRepo.find({relations: ['client', 'stylist']});
   }
 
   findOne(id: number) {
