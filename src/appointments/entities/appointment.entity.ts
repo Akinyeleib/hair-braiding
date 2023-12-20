@@ -15,7 +15,7 @@ export class Appointment {
   @Column()
   paymentStatus: string;
 
-  @Column()
+  @Column({nullable: true})
   date: Date;
 
   @ManyToOne(() => Stylist, stylist => stylist.appointment)

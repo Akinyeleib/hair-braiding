@@ -1,4 +1,4 @@
-import { IsDateString, IsIn, IsPositive } from "class-validator";
+import { IsDate, IsIn, IsOptional, IsPositive } from "class-validator";
 
 export class CreateAppointmentDto {
 
@@ -6,15 +6,17 @@ export class CreateAppointmentDto {
     clientID: number;
 
     @IsPositive()
-    style: number;
+    styleID: number;
 
     @IsIn(["PAID", "PENDING"])
+    @IsOptional()
     paymentStatus: string;
 
-    @IsDateString()
+    @IsDate()
+    @IsOptional()
     date: string;
 
     @IsPositive()
-    stylist: number;
+    stylistID: number;
 
 }
