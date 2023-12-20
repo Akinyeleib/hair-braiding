@@ -7,6 +7,7 @@ import { Style } from './entities/style.entity';
 @Module({
   controllers: [StylesController],
   imports: [TypeOrmModule.forFeature([Style])],
+  exports: [StylesService],
   providers: [StylesService],
 })
 export class StylesModule {}
