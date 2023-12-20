@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsNumberString, IsString, Matches } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumberString, IsString, IsUrl, Matches } from 'class-validator';
 export class CreateClientDto {
   @IsString()
   @IsNotEmpty()
@@ -17,7 +17,7 @@ export class CreateClientDto {
   @IsString()
   @IsNotEmpty()
   gender: string;
-  @IsString()
+  @IsUrl()
   @IsNotEmpty()
   image_url: string;
   @IsNumberString()
