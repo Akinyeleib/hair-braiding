@@ -12,7 +12,7 @@ export class Stylist {
   rating: Rating[];
 
   @Column()
-  payment: string;
+  paymentInfo: string;
 
   @OneToMany(() => Appointment, appointment => appointment.stylist)
   appointment: Appointment[];
