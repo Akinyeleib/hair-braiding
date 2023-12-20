@@ -1,4 +1,5 @@
 import { hash } from "bcrypt";
+import { IsString, Matches } from "class-validator";
 import { Appointment } from "src/appointments/entities/appointment.entity";
 import { Rating } from "src/ratings/entities/rating.entity";
 import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -30,7 +31,7 @@ export class Client {
   @Column()
   image_url: string;
 
-  @Column()
+  @IsString()
   phone_number: string;
 
   @Column()

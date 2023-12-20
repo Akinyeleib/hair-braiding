@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsNumberString, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumberString, IsString, Matches } from 'class-validator';
 export class CreateClientDto {
   @IsString()
   @IsNotEmpty()
@@ -22,6 +22,7 @@ export class CreateClientDto {
   image_url: string;
   @IsNumberString()
   @IsNotEmpty()
+  @Matches(/^(\+?234|0)[7-9][01]\d{8}$/, {message: "Invalid Nigerian phone number format"})
   phone_number: string;
   @IsString()
   @IsNotEmpty()
