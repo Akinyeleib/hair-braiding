@@ -8,11 +8,11 @@ export class Stylist {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToMany(() => Rating, rating => rating.stylist)
-  rating: Rating[];
-
   @Column()
   paymentInfo: string;
+
+  @OneToMany(() => Rating, rating => rating.stylist)
+  rating: Rating[];
 
   @OneToMany(() => Appointment, appointment => appointment.stylist)
   appointment: Appointment[];
