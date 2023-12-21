@@ -1,9 +1,10 @@
-import { CanActivate, ExecutionContext, UnauthorizedException } from "@nestjs/common";
+import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { configDotenv } from "dotenv";
 import { Request } from "express";
 configDotenv();
 
+@Injectable()
 export class JWTGuard implements CanActivate {
 
   constructor(
@@ -24,12 +25,12 @@ export class JWTGuard implements CanActivate {
       throw new UnauthorizedException("Invalid token: " + error);
     }
 
-    return false;
+    return true;
   }
 
   private extractTokenFromHeader(request: Request) : string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    return type === 'Bearer' ? token : undefined;
+    return type == 'Bearer' ? token : undefined;
   }
 
 }
