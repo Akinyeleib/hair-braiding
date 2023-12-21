@@ -16,8 +16,8 @@ export class AuthController {
   }
 
   @Post('register')
-  signup(createClientDTO: CreateClientDto) {
-    this.authService.register(createClientDTO);
+  signup(@Body() createClientDTO: CreateClientDto) {
+    return this.authService.register(createClientDTO);
   }
 
 }
