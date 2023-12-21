@@ -10,7 +10,7 @@ configDotenv();
   controllers: [AuthController],
   imports: [ClientsModule, JwtModule.register({
     secret: process.env.JWT_SECRET,
-    // signOptions : '60s',
+    signOptions: {expiresIn : '60s'},
   })],
   providers: [AuthService]
 })
