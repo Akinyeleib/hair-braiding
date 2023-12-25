@@ -27,4 +27,9 @@ export class AuthController {
     return "passed"
   }
 
+  @Post('verify-email-address')
+  verifyMail(@Body('email') email: string) {
+    return {email};
+  }
+
 }
