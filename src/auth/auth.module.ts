@@ -4,6 +4,8 @@ import { AuthService } from './auth.service';
 import { ClientsModule } from 'src/clients/clients.module';
 import { JwtModule } from '@nestjs/jwt';
 import { configDotenv } from 'dotenv';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Auth } from './entities/auth.entity';
 configDotenv();
 
 @Module({
@@ -11,7 +13,8 @@ configDotenv();
   imports: [ClientsModule, JwtModule.register({
     secret: process.env.JWT_SECRET,
     signOptions: {expiresIn : '60s'},
-  })],
-  providers: [AuthService]
+  }),
+  TypeOrmModule.forFeature([Auth])],
+  providers: [AuthService],
 })
 export class AuthModule {}
