@@ -3,6 +3,7 @@ import { LoginDTO } from './dto/login.dto';
 import { AuthService } from './auth.service';
 import { CreateClientDto } from 'src/clients/dto/create-client.dto';
 import { JWTGuard } from './jwt-guard.auth';
+import { VerifyEmailAddressDTO } from './dto/verify-email.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -28,8 +29,8 @@ export class AuthController {
   }
 
   @Post('verify-email-address')
-  verifyMail(@Body('email') email: string) {
-    return {email};
+  verifyMail(@Body() verifyEmailAddressDTO: VerifyEmailAddressDTO) {
+    return this.authService.verifyMail(verifyEmailAddressDTO);
   }
 
 }
