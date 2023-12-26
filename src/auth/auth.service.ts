@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
 import { ClientsService } from 'src/clients/clients.service';
@@ -32,14 +32,20 @@ export class AuthService {
     const {email} = verifyEmailAddressDTO;
 
     const user = await this.clientService.findUserbyEmail(email);
-    if (!user) return "Invalid email address";
+    if (!user) throw new NotFoundException("Invalid email address");
 
     return 'email successfully verified';
     
   }
 
-  register(createClientDTO: CreateClientDto) {
-    return this.clientService.create(createClientDTO);
+  async register(createClientDto: CreateClientDto) {
+
+    // check for duplicate username, email, 
+     if (await this.clientService.findUserbyUsername(createClientDto.username)) throw new BadRequestException("Duplicate username");
+     if (await this.clientService.findUserbyEmail(createClientDto.email)) throw new BadRequestException("Duplicate email address");
+
+    return this.clientService.create(createClientDto);
+
   }
 
 }
