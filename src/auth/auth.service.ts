@@ -72,8 +72,8 @@ export class AuthService {
   async register(createClientDto: CreateClientDto) {
 
     // check for duplicate username, email, 
-     if (await this.clientService.findUserbyUsername(createClientDto.username)) throw new BadRequestException("Duplicate username");
-     if (await this.clientService.findUserbyEmail(createClientDto.email)) throw new BadRequestException("Duplicate email address");
+    if (await this.clientService.findUserbyUsername(createClientDto.username)) throw new BadRequestException("Duplicate username");
+    if (await this.clientService.findUserbyEmail(createClientDto.email)) throw new BadRequestException("Duplicate email address");
 
     return this.clientService.create(createClientDto);
 
