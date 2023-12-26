@@ -5,6 +5,7 @@ import { Style } from 'src/styles/entities/style.entity';
 import { Appointment } from 'src/appointments/entities/appointment.entity';
 import { Rating } from 'src/ratings/entities/rating.entity';
 import { Stylist } from 'src/stylists/entities/stylist.entity';
+import { Auth } from 'src/auth/entities/auth.entity';
 configDotenv()
 
 export const typeOrmConfig: TypeOrmModuleOptions = {  
@@ -14,7 +15,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: process.env.DB_USER_NAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [Client, Style, Appointment, Rating, Stylist],
+  entities: [Client, Style, Appointment, Rating, Stylist, Auth],
   synchronize: true,
   logging: true,
 }
