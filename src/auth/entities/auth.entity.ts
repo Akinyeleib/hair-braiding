@@ -14,7 +14,8 @@ export class Auth {
   @JoinColumn()
   client: Client;
 
-  @CreateDateColumn({default: Date.now()})
+  // @CreateDateColumn({type : 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  @Column()
   loginDate: Date;
   
 }
