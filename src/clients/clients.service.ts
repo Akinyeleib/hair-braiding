@@ -15,15 +15,6 @@ export class ClientsService {
   
   async create(createClientDto: CreateClientDto) {
 
-    // check for duplicate username, email, 
-    if (await this.findUserbyUsername(createClientDto.username)) throw new BadRequestException("Duplicate username");
-    if (await this.findUserbyEmail(createClientDto.email)) throw new BadRequestException("Duplicate email address");
-    // await this.clientRepo.findOne({where: {email: createClientDto.email}})
-    //   .then((value) => {
-        // if (value) throw new BadRequestException("Duplicate email address");
-      //   }
-      // ).catch();
-
     const client = this.clientRepo.create(createClientDto);
     client.password = await hash(client.password, 10);
     return this.clientRepo.save(client);
