@@ -40,6 +40,9 @@ export class Client {
   @Column({default: "ACTIVE"})
   status: string;
 
+  @Column({default: false})
+  emailVerified: boolean;
+
   // @Column({default: Date.now()})
   // registrationDate: Date;
 
