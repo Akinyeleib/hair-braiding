@@ -12,10 +12,11 @@ export class Auth {
 
   @OneToOne(() => Client, client => client, {onDelete: "CASCADE", onUpdate: "CASCADE"})
   @JoinColumn()
+  // @PrimaryColumn()
   client: Client;
 
   // @CreateDateColumn({type : 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-  @Column()
+  @Column({nullable: true, default: null})
   loginDate: Date;
   
 }

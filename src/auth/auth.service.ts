@@ -7,6 +7,9 @@ import { CreateClientDto } from 'src/clients/dto/create-client.dto';
 import { VerifyEmailAddressDTO } from './dto/verify-email.dto';
 import { Resend } from 'resend';
 import { configDotenv } from 'dotenv';
+import { Auth } from './entities/auth.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 configDotenv();
 
 @Injectable()
@@ -15,6 +18,7 @@ export class AuthService {
   constructor(
     private clientService: ClientsService,
     private jwtService: JwtService,
+    @InjectRepository(Auth) private authRepo: Repository<Auth>,
   ) {}
 
   async login(loginDTO: LoginDTO) {
@@ -26,7 +30,17 @@ export class AuthService {
     const validPassword = await compare(password, user.password)
     if (!validPassword) return "Bad credentials";
 
-    return this.jwtService.signAsync({username});
+    const token = await this.jwtService.signAsync({username});
+    this.authRepo.delete({ client : user });
+
+    this.authRepo.save({
+      token,
+      client : user 
+    });
+
+    this.authRepo.upsert({token, client : user }, ["on-conflict-do-update"]);
+
+    return token;
     
   }
 
