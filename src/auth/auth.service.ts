@@ -20,6 +20,12 @@ export class AuthService {
     private jwtService: JwtService,
     @InjectRepository(Auth) private authRepo: Repository<Auth>,
   ) {}
+  
+  logout(loginDTO: LoginDTO, req: any) {
+    // check if token is valid: won't get here because of the guard on the controller
+    return req['user']['username'] 
+    // check if token belongs to the right user
+  }
 
   async login(loginDTO: LoginDTO) {
     
@@ -37,8 +43,6 @@ export class AuthService {
       token,
       client : user 
     });
-
-    this.authRepo.upsert({token, client : user }, ["on-conflict-do-update"]);
 
     return token;
     
