@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, Type } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ClientsModule } from './clients/clients.module';
@@ -9,6 +9,7 @@ import { AppointmentsModule } from './appointments/appointments.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
 import { AuthModule } from './auth/auth.module';
+import { MiddlewareConfigProxy } from '@nestjs/common/interfaces';
 
 @Module({
   imports: [
@@ -17,4 +18,8 @@ import { AuthModule } from './auth/auth.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements MiddlewareConsumer {
+  apply(...middleware: (Function | Type<any>)[]): MiddlewareConfigProxy {
+    throw new Error('Method not implemented.');
+  }
+}
