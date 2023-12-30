@@ -2,13 +2,15 @@ import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from
 import { JwtService } from "@nestjs/jwt";
 import { configDotenv } from "dotenv";
 import { Request } from "express";
+import { ClientsService } from "src/clients/clients.service";
 configDotenv();
 
 @Injectable()
 export class JWTGuard implements CanActivate {
 
   constructor(
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private clientService: ClientsService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -20,7 +22,9 @@ export class JWTGuard implements CanActivate {
 
     try {
       const payload = await this.jwtService.verifyAsync(token, {secret : process.env.JWT_SECRET});
-      request['user'] = payload;
+      const username = payload['username'];
+      request['signedInUsername'] = username;
+      request['signedInUser'] = await this.clientService.findUserbyUsername(username);
     } catch (error) {
       throw new UnauthorizedException("Invalid token: " + error);
     }
