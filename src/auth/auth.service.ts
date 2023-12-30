@@ -23,7 +23,8 @@ export class AuthService {
   
   logout(loginDTO: LoginDTO, req: any) {
     // check if token is valid: won't get here because of the guard on the controller
-    return req['user']['username'] 
+
+    return { signedInUser : req['signedInUser'] };
     // check if token belongs to the right user
   }
 
